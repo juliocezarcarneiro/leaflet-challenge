@@ -1,14 +1,23 @@
 // Create the 'basemap' tile layer that will be the background of our map.
-
+let basemap = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "© OpenStreetMap contributors"
+});
 
 // OPTIONAL: Step 2
 // Create the 'street' tile layer as a second background of the map
-
+let street = L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+  attribution: "© OpenStreetMap contributors, Humanitarian OpenStreetMap Team"
+});
 
 // Create the map object with center and zoom options.
-
+let map = L.map("map", {
+  center: [20, 0],
+  zoom: 3,
+  layers: [basemap]
+});
 
 // Then add the 'basemap' tile layer to the map.
+basemap.addTo(map);
 
 // OPTIONAL: Step 2
 // Create the layer groups, base maps, and overlays for our two sets of data, earthquakes and tectonic_plates.
