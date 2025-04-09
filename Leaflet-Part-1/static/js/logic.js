@@ -89,10 +89,6 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     }
   }).addTo(earthquakes);
 
-  // OPTIONAL: Step 2
-  // Add the data to the earthquake layer instead of directly to the map.
-  }).addTo(map);
-
   // Create a legend control object.
   let legend = L.control({
     position: "bottomright"
@@ -103,23 +99,35 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     let div = L.DomUtil.create("div", "info legend");
 
     // Initialize depth intervals and colors for the legend
+    let depths = [0, 10, 30, 50, 70, 90];
+    let colors = ['#98EE00', '#D4EE00', '#EECC00', '#EE9C00', '#EA822C', '#EA2C2C'];
 
+    // Add a title to the legend
+    div.innerHTML += '<h4>Depth (km)</h4>';
 
     // Loop through our depth intervals to generate a label with a colored square for each interval.
-
+    for (let i = 0; i < depths.length; i++) {
+      div.innerHTML +=
+        '<i style="background:' + colors[i] + '; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> ' +
+        depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+');
+    }
 
     return div;
   };
 
   // Finally, add the legend to the map.
-
+legend.addTo(map);
 
   // OPTIONAL: Step 2
   // Make a request to get our Tectonic Plate geoJSON data.
   d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function (plate_data) {
     // Save the geoJSON data, along with style information, to the tectonic_plates layer.
-
+    L.geoJson(plate_data, {
+      color: "#FF0000",
+      weight: 2
+    }).addTo(tectonic_plates);
 
     // Then add the tectonic_plates layer to the map.
-
+    tectonic_plates.addTo(map);
   });
+});
