@@ -57,12 +57,8 @@ The repository is organized as follows:
 
 * ChatGPT: for brainstorming, clarification and coding assistance.
 
-* USGS Earthquake Data: https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php.
-
 * Leaflet.js: open-source JavaScript library for interactive maps. https://leafletjs.com/.
 
 * D3.js: https://d3js.org/.
 
 * OpenStreetMap: OpenStreetMap. https://www.openstreetmap.org/.
-
-* Humanitarian (HOT) Layer: https://www.hotosm.org/.
